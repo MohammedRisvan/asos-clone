@@ -34,17 +34,15 @@
 // }
 
 // export default Register
-import React from 'react'
-import Join from './signup'
-import Login from './login'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const Register = () => {
   return (
     <div className=' flex flex-col items-center justify-center gap-5 w-full h-auto py-10 bg-blue-300'>
 <h1 className='font-bold text-5xl'>asos</h1>      
 <div className='sm:w-1/2 w-full'>
-{/* <Join/> */}
-<Login/>
+<Outlet/>
 </div>
     </div>
   )
