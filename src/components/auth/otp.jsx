@@ -1,10 +1,25 @@
+import Axios from 'axios';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 function Otp() {
   const [value,setValue]=useState("");
+
+  const serverpass=async()=>{
+  try {
+    await Axios.post("http://localhost:3005/asos/register",{otp:value},{withCredentials:true})
+    const userdata=localStorage.getItem('asosuser');
+    localStorage.removeItem("asosuser");
+    console.log(userdata);
+
+  } catch (error) {
+    console.log(error)
+  }
+  }
   const verify=()=>{
-    if(value.length>0){
-      alert(`Otp is ${value}`);
+    if(value.length>3){
+      console.log(`Otp is ${value}`);
+      serverpass();
   }
 }
   return (
@@ -16,4 +31,4 @@ function Otp() {
   )
 }
 
-export default Otp
+export default Otp;

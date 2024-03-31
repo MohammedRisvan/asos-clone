@@ -17,6 +17,7 @@ function App() {
   <Route path="/signup" element={<Join/>}/>
   <Route path="/registerotp" element={<Otp/>}/>
   <Route path="/signin" element={<Login/>}/>
+<Route path="/"element={<Home/>}/>
 </Route>
  </Routes>
       </>

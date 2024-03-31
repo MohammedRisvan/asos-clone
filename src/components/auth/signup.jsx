@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import axios from 'axios';
+import Axios  from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,20 +11,30 @@ function Join() {
         lastname:"",
         email:"",
         password:"",
+        confirmpassword:"",
         phone:"",
         dateofbirth:"",
     });
     const navigate=useNavigate();
-
-    const passerver=async (e)=>{
+    const handelchange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData, [name]: value
+      })
+    }
+    
+    const passerver=async ()=>{
       try{
-        await axios.post("http://localhost:1/asos/signup",{
-          email:formData.email,
-        },{withCredentials:true}).then((res)=>{
-          const {message,error,success}=res.data;
-       console.log(message,error,)
-          navigate("./rejisterotp");
-        });
+        console.log("hellow",formData)
+        const data=  await Axios.post("http://localhost:3005/asos/signup",formData,{withCredentials:true})
+       console.log(data.data)
+       if(data.data.success==="otp successsfully transefted"){
+        toast.success(data.data.success);
+        localStorage.setItem("asosuser",data.data.asosuser);
+       }else{
+        toast.error(data.data.error);
+       }
+       
       }catch(error){
      console.log("error :",error);
      toast.error(error);
@@ -37,6 +47,9 @@ function Join() {
         if (!formData.firstname.trim()) {
           validationErrors.firstname = "firstname is not required"
         }
+        if (!formData.lastname.trim()) {
+          validationErrors.lastname = "lastname is not required"
+        }
         if (!formData.email.trim()) {
           validationErrors.email = "email is requird"
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -45,23 +58,20 @@ function Join() {
         if (!formData.password.trim()) {
           validationErrors.password = "password is requird"
         } else if (formData.password.length < 6) {
-          validationErrors.password = "password should be at least 6 Character"
+         validationErrors.password = "password should be at least 6 Character"
         }
-    //     if (formData.confirmpassword !== formData.password) {
-    //       validationErrors.confirmpassword = "password not match"
-    //     }
-    
-    // console.log(validationErrors)
+        if (formData.confirmpassword !== formData.password) {
+          validationErrors.confirmpassword = "password not match"
+        }
+    console.log(validationErrors)
         setError(validationErrors);
         if (Object.keys(validationErrors).length === 0) {
-          toast.success("Form Submitted is successfully")
-          console.log(validationErrors)
-         
-    
-    }
-    // else{
-    //   toast.error(validationErrors);
-    // }
+          passerver();
+          toast.success("Form Submitted is successfully");
+      }
+     else{
+       toast.error("please require a data");
+     }
 
   }
 
@@ -87,37 +97,43 @@ function Join() {
             <label>
                 EMAIL ADDRESS :
             </label>
-            <input type='email'onChange={(e)=>{formData.email=e.target.value}} //value={formData.email}
+            <input type='email'onChange={handelchange} //value={formData.email}
              name='email' className='w-5/6 border border-black'/>
-           {error.email && <span>{error.email}</span>}
+           {error.email && <span className='text-red-700'>{error.email}</span>}
             <label>
                 FIRST NAME :
             </label>
-            <input type='text' onChange={(e)=>{formData.firstname=e.target.value}}// value={formData.firestname}
-             name='firestname'  className='w-5/6 border border-black'/>
-            {error.firstname && <span id='ERROR'>{error.firstname}</span>}
+            <input type='text' onChange={handelchange}// value={formData.firestname}
+             name='firstname'  className='w-5/6 border border-black'/>
+            {error.firstname && <span className='text-red-700'>{error.firstname}</span>}
             <label>
                 LAST NAME :
             </label>
-            <input type='text'onChange={(e)=>{formData.lastname=e.target.value}} 
+            <input type='text'onChange={handelchange} 
             //value={formData.lastname}
              name='lastname'  className='w-5/6 border border-black'/>
-            {error.lastname&&<span>{error.lastname}</span>}
+            {error.lastname&&<span className='text-red-700'>{error.lastname}</span>}
             <label>
                 Password :
             </label>
             <label className=' w-5/6 px-3 flex border border-black'>
-            <input type={show} className='w-full h-full  inline' onchange={(e)=>{formData.password=e.target.value}} onDoubleClick={(e)=>{console.log(e.target.value)}}/>
-            <button type='button' className=""onClick={inputype}  >s</button>
+            <input type={show} name='password' className='w-full h-full  inline' onChange={handelchange} />
+            <button type='button' onClick={inputype}  >s</button>
             </label>
             {error.password&&<span className='text-red-700'>{error.password}</span>}
+              <label>Confirm Password:</label>
+            <label className=' w-5/6 px-3 flex border border-black'>
+            <input type={show} name='confirmpassword' className='w-full h-full  inline' onChange={handelchange} />
+            <button type='button' className=""onClick={inputype} >s</button>
+            </label>
+            {error.password&&<span className='text-red-700'>{error.confirmpassword}</span>}
             <label>
                 Data of Birth:
             </label>
-            <input type="date" onChange={(e)=>{console.log(e.target.value)}} className='w-5/6 border border-black'/>
+            <input type="date" name='dateofbirth' onChange={handelchange} className='w-5/6 border border-black'/>
         </form>
             <button type="button" onClick={handlesubmit} className='px-3 py-2 bg-gray-900 text-white font-semibold '>
-              Join</button>                                                                                                                                                                        
+              Join</button>                                                                                                                                                                     
     </div>
   )
 }

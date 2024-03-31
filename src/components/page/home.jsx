@@ -1,4 +1,9 @@
+import bcarousel from "../images/carosel2.jpg"
+
 const Home = () => {
+    const carosel=[
+        <img src={bcarousel} className="w-screen h-auto"/>
+    ]
     const homeCarouselItems = [
         {
             bgColor: 'bg-blue-200',
@@ -33,11 +38,11 @@ const Home = () => {
         <div>
             <div className="relative">
                 {/* Carousel items */}
-                <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-                    {homeCarouselItems.map((item, index) => (
+                <div className=" w-full overflow-hidden after:clear-both after:block after:content-['']">
+                    {carosel.map((item, index) => (
                         <div
                             key={index}
-                            className={`relative float-left -mr-[100%] w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none ${
+                            className={`float-left -mr-[100%] w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none ${
                                 index === 0 ? 'opacity-100' : ''
                             }`}
                         >
