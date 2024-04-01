@@ -1,33 +1,122 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import Axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [show,setShow]=useState("password")
-  return (
-    <div className='w-full bg-white flex flex-col justify-center gap-10 items-center px-5 py-10 rounded'>
-       <div className='flex  gap-5'>
-            <button className='border border-b-slate-700 px-5 ' href>Join</button>
-            <div className='w-0.5 h-10 bg-slate-700'/>
-            <button className='border border-b-blue-700 px-5 '>Sign In</button>
-        </div>
-        <form className='flex flex-col gap-3'>
-          <label>
-            EMAIL ADDRESS :
-          </label>
-          <input type='email'className='border border-black'/>
-          <label>
-            PASSWORD :
-          </label>
-          <label className='  px-3 flex border border-black'>
-            <input type={show} className='w-full h-full  inline' />
-            <button type='button' className=""onClick={()=>{show==="password"?setShow("text"):setShow("password")}}>s</button>
-            </label>
-        </form>
-        <div className='flex flex-col '>
-            <button type='button' className='bg-gray-950 text-white w-full h-full'>SIGN IN</button>
-            <a >Forget Password?</a>
-        </div>
-    </div>
-  )
-}
+  const [show, setShow] = useState("password");
+  const [error, setError] = useState({});
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [forget,setForget]=useState(true);
+  const navigate=useNavigate();
+  const passerver = async () => {
+    const loginuser = await Axios.post(
+      "http://localhost:3005/asos/signin",
+      {formData,forget},
+      { withCredentials: true }
+    );
+    console.log(loginuser);
+    const { success, error } = loginuser.data;
+    if (success === "Login success fully") {
+      toast.success(success);
+      navigate("/")
+    } else {
+      toast.error(error);
+    }
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+  };
 
-export default Login
+  const handleSubmit = (e) => {
+    console.log("this is form", formData);
+    
+    const validationErrors = {};
+    if (!formData.email.trim()) {
+      validationErrors.email = "please Enter your email";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      validationErrors.email = "email is not valid";
+    }
+    if (forget&&!formData.password.trim()) {
+      validationErrors.password = "Please enter your password";
+    }
+    setError(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      toast.success("Logged in Successfully");
+      passerver();
+    } else {
+      toast.error("please enter vallid data");
+    }
+  };
+  const Forget=()=>{
+setForget(!forget)
+  }
+  return (
+    <div className="w-full bg-white flex flex-col justify-center gap-10 items-center px-5 py-10 rounded">
+      <div className="flex  gap-5">
+        <button className="border border-b-slate-700 px-5 " href>
+          Join
+        </button>
+        <div className="w-0.5 h-10 bg-slate-700" />
+        <button className="border border-b-blue-700 px-5 ">Sign In</button>
+      </div>
+      <form className="flex flex-col gap-3">
+        <label>EMAIL ADDRESS :</label>
+        <input
+          type="email"
+          name="email"
+          onChange={handleChange}
+          className="border border-black"
+        />
+        {error.email && <span className="text-red-700">{error.email}</span>}
+        {forget&&<div className="flex flex-col gap-3"><label>PASSWORD :</label>
+        <label className="px-3 flex border border-black">
+          <input
+            type={show}
+            name="password"
+            onChange={handleChange}
+            className="w-full h-full  inline"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              show === "password" ? setShow("text") : setShow("password");
+            }}
+          >
+            s
+          </button>
+        </label>
+        {error.password && (
+          <span className="text-red-700">{error.password}</span>
+        )}</div>}
+      </form>
+      {forget?<div className="flex flex-col ">
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="bg-gray-950 text-white w-full h-full"
+        >
+          SIGN IN
+        </button>
+        <a onClick={Forget}>Forget Password?</a>
+      </div>:<div className="flex  justify-between w-full">  
+        <button
+          type="button"
+          onClick={Forget}
+          className="bg-gray-950 text-white  h-full"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          className="bg-gray-950 text-white  h-full"
+        >Next
+        </button>
+        </div>}
+    </div>
+  );
+};
+
+export default Login;

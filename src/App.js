@@ -7,6 +7,8 @@ import Navber from "./components/Layout/navbar";
 import Home from "./components/page/home";
 import Login from "./components/auth/login";
 import { Toaster } from "react-hot-toast";
+import Updatepassword from "./components/auth/password";
+import Profile from "./components/page/profile";
  
 
 function App() {
@@ -17,7 +19,8 @@ function App() {
   <Route path="/signup" element={<Join/>}/>
   <Route path="/registerotp" element={<Otp/>}/>
   <Route path="/signin" element={<Login/>}/>
-<Route path="/"element={<Home/>}/>
+<Route path="/password"element={<Updatepassword/>}/>
+<Route path="/profile" element={<Profile/>} />
 </Route>
  </Routes>
       </>

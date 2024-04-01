@@ -1,15 +1,22 @@
 import Axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Otp() {
   const [value,setValue]=useState("");
-
+  const navigate=useNavigate();
   const serverpass=async()=>{
   try {
-    await Axios.post("http://localhost:3005/asos/register",{otp:value},{withCredentials:true})
     const userdata=localStorage.getItem('asosuser');
-    localStorage.removeItem("asosuser");
+   const serverdata=await Axios.post("http://localhost:3005/asos/register",{otp:value,userdata},{withCredentials:true})
+    const {success,error}=serverdata.data;
+   if(success==="user created success"){
+     toast.success(success)
+     navigate("/signin")
+   }else{
+    toast.error(error);
+   }
     console.log(userdata);
 
   } catch (error) {
@@ -21,6 +28,8 @@ function Otp() {
       console.log(`Otp is ${value}`);
       serverpass();
   }
+  toast.error("your full otp please enter  ")
+  return;
 }
   return (
     <div className='bg-blue-300 h-screen flex flex-col items-center gap-5'>

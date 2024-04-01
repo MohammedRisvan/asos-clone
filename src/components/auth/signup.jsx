@@ -31,6 +31,7 @@ function Join() {
        if(data.data.success==="otp successsfully transefted"){
         toast.success(data.data.success);
         localStorage.setItem("asosuser",data.data.asosuser);
+        navigate("/registerotp")
        }else{
         toast.error(data.data.error);
        }
