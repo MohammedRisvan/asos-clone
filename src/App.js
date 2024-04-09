@@ -3,18 +3,31 @@ import Otp from "./components/auth/otp";
 import Register from "./components/Layout/registerlayout";
 import Join from "./components/auth/signup";
 import Footer from "./components/Layout/footer";
-import Navber from "./components/Layout/navbar";
+
 import Home from "./components/page/home";
 import Login from "./components/auth/login";
 import { Toaster } from "react-hot-toast";
 import Updatepassword from "./components/auth/password";
 import Profile from "./components/page/profile";
+import Men, { Menpage } from "./components/page/men";
+import Women from "./components/page/women";
+import HomeLayout from "./components/Layout/homelayout";
+import MenSale from "./components/page/sale";
  
 
 function App() {
   return (<>
   <Toaster/>
  <Routes>
+  <Route path="/" element={<HomeLayout/>}>
+
+{/* <Route path="/men" element= {<Menpage/>} >
+<Route path="/" element= {<Menpage/>} />
+  {/* <Route path="/:id" sales /> *}/
+</Route> */}
+<Route path="/men" element={<MenSale />} />
+<Route path="/women" element={<Women/>}/>
+  </Route>
 <Route path="/" element={<Register/>}>
   <Route path="/signup" element={<Join/>}/>
   <Route path="/registerotp" element={<Otp/>}/>
