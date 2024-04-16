@@ -8,6 +8,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [forget, setForget] = useState(true);
   const navigate = useNavigate();
+  
   const passerver = async () => {
     const loginuser = await Axios.post(
       "http://localhost:3005/asos/signin",
@@ -105,6 +106,7 @@ const Login = () => {
         {forget ? (
           <div className="flex flex-col gap-5 items-center">
             <button
+            type="button"
               onClick={handleSubmit}
               className="bg-gray-800 text-white font-semibold px-24 py-2 text-lg w-full h-full hover:bg-gray-600"
             >
@@ -117,14 +119,14 @@ const Login = () => {
             <button
               type="button"
               onClick={Forget}
-              className="bg-gray-950 text-white  h-full"
+              className="bg-blue-800 text-white rounded-lg font-semibold text-xl px-3 py-1"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSubmit}
-              className="bg-gray-950 text-white  h-full"
+              className="bg-gray-950 text-white font-semibold text-xl px-3 py-1 rounded-lg"
             >
               Next
             </button>

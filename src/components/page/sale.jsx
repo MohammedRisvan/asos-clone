@@ -1,35 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useLocation} from "react-router-dom";
+import  Axios  from 'axios';
 
-const products=[
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-    {price:175,
-    image:"https://images.asos-media.com/products/calvin-klein-jeans-unisex-reversible-skater-jacket-in-black/205437190-2?$n_320w$&wid=317&fit=constrain",
-    name:"calvin Klein jeans Dark jacket"},
-]
+
 const MenSale = () => {
- const location=useLocation()
+//   ()=>{
+// // await Axios.get("http://localhost:3005/asos/showproduct").then((responce)=>setProduct(responce.data));
+//   }
+  const location=useLocation()
  const path=location.pathname 
 //  console.log(location.pathname)
 //  console.log(location,path)      
    const [showText,setShowText] = useState(true);
+const [products,setProduct]=useState([]);
+console.log(products)
+
 
     return (
     <div>
@@ -58,12 +43,10 @@ const MenSale = () => {
         <p className='py-2 px-8 flex-shrink-0 bg-slate-200 text-sm font-bold tracking-topwide cursor-pointer rounded-2xl '>SUITS &TILORING</p>
         <p className='py-2 px-8 flex-shrink-0 bg-slate-200 text-sm font-bold tracking-topwide cursor-pointer rounded-2xl '>ACTVEWEARS</p>
       </div>
-      <div className='bg-gray-200 font-light text-lg grid  grid-flow-row grid-cols-6 gap-2 p-3 h-36  w-full'>
-        <div className='w-72 font-medium h-80'>
-        <div className="bg-white w-full flex item-center jsutify-center rounded">
-          Sort
-        </div>
-        </div>
+      <div className='bg-gray-200 font-light text-lg  grid  grid-flow-col grid-rows-2   gap-2 p-3 h-36  w-full'>
+      <select name="sort" id="">
+        <option value="">Sort</option>
+      </select>
         <select className='bg-transparent w-full px-10  border-y-2 border-slate-300 hover:text-blue-600'>
             <option value="">Size</option>
         </select>
