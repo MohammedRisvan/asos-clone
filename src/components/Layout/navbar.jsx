@@ -1,13 +1,24 @@
 import React, { useState } from "react";
+import { AiOutlineMessage } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
+import { CiCircleQuestion } from "react-icons/ci";
 import { FiUser } from "react-icons/fi";
 import { IoHeartOutline } from "react-icons/io5";
+import { PiShoppingBagOpenLight } from "react-icons/pi";
+import { RiMessage2Line } from "react-icons/ri";
+import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
 const Navber = () => {
-  const [men, setMen] = useState(true);
+  const [profile, setProfile] = useState(false);
 
   const navigate = useNavigate();
+  const showProfile=()=>{
+    // const token=document.cookie()
+    // console.log(token)
+    // if(){
+
+  }
 
   return (
     <div className="flex flex-col w-full h-50  h-full">
@@ -40,8 +51,38 @@ const Navber = () => {
             placeholder="Search for itenms and brands ..."
           />
         </div>
-        <button type="button" className="h-full px-5">
-          <FiUser className="text-white h-10 w-7" />
+        <button type="button" className="h-full px-5"
+         onMouseEnter={()=>{setProfile(true)}}
+       
+         onClick={()=>{if(!profile){setProfile(true)}else{setProfile(false)}}}
+         onMouseLeave={()=>{setProfile(false)}}>
+          <FiUser className="text-white h-10 w-7"/>
+        {profile&&<div   onMouseEnter={()=>{setProfile(true)}} className="w-60 -ml-16 absolute bg-white">
+            <div className="w-full flex justify-between bg-blue-200 h-10 px-3 py-3">
+            <span><a href="/signin">Sign In</a> |<a href="/signup">Join</a></span> <button onClick={()=>{setProfile(false)}}><RxCross1/></button>
+            </div>
+            <ul className="flex flex-col gap-3 px-3 py-3">
+              <li className="flex items-center gap-5">
+              <FiUser className=" h-10 w-7"/>
+              <p>My Account</p>
+              </li>
+              <li className="flex items-center gap-5">
+              <PiShoppingBagOpenLight  className=" h-10 w-7"/>
+              <p>My Order</p>
+              </li>
+              <li className="flex items-center gap-5">
+              <CiCircleQuestion className=" h-10 w-7"/>
+              <p>Returns Information</p>
+              </li>
+              <li className="flex items-center gap-5">
+              <RiMessage2Line className=" h-10 w-7"/>
+              <p>Contact Prifrances</p>
+              </li>
+            </ul>
+            <div>
+            </div>
+           </div>}
+           
         </button>
         <button className="h-full px-5">
           <IoHeartOutline

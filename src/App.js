@@ -14,7 +14,7 @@ import Women, { Womenpage } from "./components/page/women";
 import HomeLayout from "./components/Layout/homelayout";
 import MenSale from "./components/page/sale";
 import Productpage from "./components/page/productpage";
-import MenShoes from "./components/page/menshoes";
+import MenShoes from "./components/page/shoes/menshoes";
 import Manlayout from "./components/Layout/menlayout";
  
 
@@ -31,7 +31,7 @@ function App() {
 <Route path="/men" element={<Manlayout/>}>
 <Route path="showproduct/:id" element={<Productpage/>}/>
 <Route index element={<Menpage />} />
-<Route path="menshoes" element={<MenShoes />} />
+<Route path="menshoes" element={<MenShoes/>} />
 <Route path="sales" element={<MenSale />} />
 </Route>
 <Route path="/women" element={<Womenpage/>}/>

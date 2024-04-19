@@ -215,7 +215,7 @@ function Join() {
         <h1 className="font-bold text-lg">CONTACT PREFERENCES</h1>
         <p>Tell us which emails you’d like:</p>
        </label>
-       <button type="button" className="font-bold bg-purple-100 px-3" onClick={()=>{setSelect(!select)}}>{select?"CLEAR":"SELECT ALL"}</button>
+       <button type="button" className="font-bold flex flex-shrink-0 bg-purple-100 px-3 sm:h-10 items-center sm:m-10" onClick={()=>{setSelect(!select)}}>{select?"CLEAR":"SELECT ALL"}</button>
        </div>
        <label className="flex justify-between w-full font-medium"onClick={()=>{setSelect(!select)}}>
         Discounts and new drops

@@ -98,7 +98,7 @@ export const Menpage=()=>{
     </div>
     <div className='flex items-center flex-col'>
       <h2 className='font-bold text-3xl'>TRENDING BRANDS</h2>
-      <div className='flex '>
+      <div className='flex flex-wrap'>
         <img className='w-60' src={branda} alt="" />
         <img className='w-60' src={brandb} alt="" />
         <img className='w-60' src={brandc} alt="" />

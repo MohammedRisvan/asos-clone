@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import image from "../images/carosel2.jpg";
 
 const initialstate = {
-  newin: false,
-  // ishover:null,
+  // newin: false,
+  ishover:null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -33,9 +33,9 @@ function Manlayout() {
 }
 const Offernav = () => {
   return (
-    <div className=" w-full h-fit flex items-center justify-between py-1 px-2 font-bold bg-sky-300">
-      <button className="px-2 py-1 border-2 border-black rounded">WOMEN</button>
-      <h1 className=" w-60 h-16">
+    <div className=" w-full h-fit flex items-center justify-between  px-2 font-bold bg-sky-300">
+      <button className="px-2 py-1 border-2 border-black rounded ">WOMEN</button>
+      <h1 className=" w-60 h-16 mt-0">
         EXTRA 40% OFF SALE PICKS* LAST CHANCE TO BUY!
         <br /> <span>With code:</span>LASTCHANCE
       </h1>
@@ -52,22 +52,26 @@ export const MenNavbar = () => {
       <p className="py-5 px-5 bg-red-600 -skew-x-12 hover:bg-white hover:text-black h-full">
         Sales
       </p>
-
       <p onMouseEnter={()=>{dispatch({type:"SHOW",name:"newin"})}}
-      onMouseLeave={()=>{dispatch({type:"HIDE"})}}
+       onMouseLeave={()=>{dispatch({type:"HIDE"})}}
        className={`py-5 px-3 h-full hover:bg-white  hover:text-black`}>
-        New In
+       <p>New In</p> 
+       <div className="flex absolute items-center  justify-center w-full z-10">
+       {state.ishover==="newin"&&<NewIn />}  
+       </div>
       </p>
-
+     
+     
       <p
       onMouseEnter={()=>{dispatch({type:"SHOW",name:"clothing"})}}
       onMouseLeave={()=>{dispatch({type:"HIDE"})}}
        className="py-5 px-3 hover:bg-white hover:text-black h-full">
-        Clothing
+        <p>Clothing</p>
       </p>
       <p className="py-5 px-3 hover:bg-white hover:text-black "
       onMouseEnter={()=>{dispatch({type:"SHOW",name:"trending"})}}
-      onMouseLeave={()=>{dispatch({type:"HIDE"})}}>Trending</p>
+      onMouseLeave={()=>{dispatch({type:"HIDE"})}}
+      >Trending</p>
       <p className="py-5 px-3 hover:bg-white hover:text-black">Dress</p>
       <p className="py-5 px-3 hover:bg-white hover:text-black"
        onMouseEnter={()=>{dispatch({type:"SHOW",name:"shoes"})}}
@@ -81,10 +85,9 @@ export const MenNavbar = () => {
       <p className="py-5 px-3 hover:bg-white hover:text-black">MarketPlace</p>
       <p className="py-5 px-3 hover:bg-white hover:text-black">Sale</p>
     </div>
-    <div className="flex items-center fixed justify-center w-full z-10">
-          {state.ishover==="newin"&&<NewIn />}
-          {state.ishover==="clothing"&&<Clothing />}
-          {state.ishover==="trending"&&<Trending />}
+    <div className="flex items-center fixed justify-center w-full z-10">    
+    {state.ishover==="clothing"&&<Clothing />}
+          {state.ishover==="trending"&&<Trending onMouseEnter={()=>{dispatch({type:"SHOW",name:"trending"})}}/>}
           {state.ishover==="shoes"&&<Shoes/>}
         </div>
     </div>
@@ -115,7 +118,7 @@ export const NewIn = () => {
         <h1 className="font-bold text-lg">SHOW SPRING</h1>
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_global_tm_spring_480x480_1?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -124,7 +127,7 @@ export const NewIn = () => {
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/summer_holiday_outfits_sb_480x480?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -133,7 +136,7 @@ export const NewIn = () => {
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_suits_sb_3m_210324?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -142,7 +145,7 @@ export const NewIn = () => {
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_uk_hero_sb_04_480x480_05092023?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -151,7 +154,7 @@ export const NewIn = () => {
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_global_sunglasses_spring_480x480_1?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -160,7 +163,7 @@ export const NewIn = () => {
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_spring_swimwear_480x480_1?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
@@ -172,63 +175,63 @@ export const NewIn = () => {
         <h1 className="font-bold text-lg">BRAND DROPS</h1>
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_uk_newin_asosdesign_3m_117590750?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>ASOS DESIGN</p>
         </label>
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={'https://images.asos-media.com/navigation/mw_uk_newin_adidas_203m_121949817?&$n_240w$'}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>adidas</p>
         </label>
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={"https://images.asos-media.com/navigation/mw_newin_britishbrands_3M_124199441?&$n_240w$"}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>British Brands</p>
         </label>
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={"https://images.asos-media.com/navigation/mw_newin_newbalance_3M_121808719?&$n_240w$"}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>New Balance</p>
         </label>
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={"https://images.asos-media.com/navigation/mw_newinnewlook_3M_127354423?&$n_240w$"}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>New look</p>
         </label>
         <hr className="ml-10 w-full" />
         <label className="flex gap-10 items-center">
           <img
-            src={image}
+            src={"https://images.asos-media.com/navigation/mw_newin_thenorthface_3M_120001226?&$n_240w$"}
             className="w-10 h-10 rounded-full p-1 border border-slate-300"
             alt="img"
           />
-          <p>Spring Outfits</p>
+          <p>The North Face</p>
         </label>
         <hr className="ml-10 w-full" />
       </div>
       <div className="flex flex-col gap-10">
         <h1 className="font-bold text-lg">NEW EDITS</h1>
-        <img src={image} className="w-64" alt="i" />
-        <img src={image} className="w-64" alt="a" />
+        <img src={'https://images.asos-media.com/navigation/uk_mw_hero_01_1680x876_110424?&$n_320w$'} className="w-64" alt="i" />
+        <img src={'https://images.asos-media.com/navigation/mw_global_summer_shop_1680x876_2?&$n_320w$'} className="w-64" alt="a" />
       </div>
     </div>
   );
@@ -277,7 +280,7 @@ export const NewIn = () => {
           <ul className="flex gap-10 font-normal px-20 py-5">
             <li className="flex flex-col items-center">
               <img
-                src={image}
+                src={'https://images.asos-media.com/navigation/mw_uk_clothing_tall_2m_132163877?&$n_240w$&quot'}
                 className="w-16 h-16 rounded-full p-1 border-2 border-slate-600"
                 alt="iamage"
               />
@@ -285,7 +288,7 @@ export const NewIn = () => {
             </li>
             <li className="flex flex-col items-center">
               <img
-                src={image}
+                src={'https://images.asos-media.com/navigation/mw_uk_clothing_plussize_2m_120975115?&$n_240w$&quot'}
                 className="w-16 h-16 rounded-full p-1 border-2 border-slate-600"
                 alt="iamage"
               />
@@ -299,16 +302,16 @@ export const NewIn = () => {
           <ul className="flex flex-col gap-2 font-normal">
             <li className="flex gap-10 items-center">
               <img
-                src={image}
+                src={"https://images.asos-media.com/navigation/mw_clothing_holiday_3m_118685877?&$n_240w$"}
                 className="w-12 h-12 rounded-full p-1 border-2 border-slate-600"
                 alt="images"
               />
-              <p>Spring styles</p>
+              <p>Holiday</p>
             </li>
             <hr className="ml-16" />
             <li className="flex gap-10 items-center">
               <img
-                src={image}
+                src={"https://images.asos-media.com/navigation/mw_basics_app_150324?&$n_240w$"}
                 className="w-12 h-12 rounded-full p-1 border-2 border-slate-600"
                 alt="images"
               />
@@ -318,7 +321,7 @@ export const NewIn = () => {
 
             <li className="flex gap-10 items-center">
               <img
-                src={image}
+                src={"https://images.asos-media.com/navigation/mw_gbl_clothing_occasionwear_flo_105399272_3m?&$n_240w$"}
                 className="w-12 h-12 rounded-full p-1 border-2 border-slate-600"
                 alt="images"
               />
@@ -327,7 +330,7 @@ export const NewIn = () => {
             <hr className="ml-16" />
             <li className="flex gap-10 items-center">
               <img
-                src={image}
+                src={"https://images.asos-media.com/navigation/denim_mw_3m_02022024?&$n_240w$"}
                 className="w-12 h-12 rounded-full p-1 border-2 border-slate-600"
                 alt="images"
               />
@@ -336,7 +339,7 @@ export const NewIn = () => {
             <hr className="ml-16" />
             <li className="flex gap-10 items-center">
               <img
-                src={image}
+                src={"https://images.asos-media.com/navigation/mw_NL_Clothing_Holly_3m_121415612?&$n_240w$"}
                 className="w-12 h-12 rounded-full p-1 border-2 border-slate-600"
                 alt="images"
               />
@@ -362,25 +365,25 @@ const Trending = () => {
   return (
     <div className="flex gap-5 p-5 w-5/6 h-full bg-slate-50">
       <img
-        src={image}
+        src={"https://images.asos-media.com/navigation/mw_basics_trending_150324?&$n_320w$"}
         alt="dsfh"
         className="w-48 border-2 p-px hover:border-blue-500"
       />
       <div className="h-60 w-px bg-slate-500" />
       <img
-        src={image}
+        src={"https://images.asos-media.com/navigation/newin_Streetwear_220224?&$n_320w$"}
         alt="dsfh"
         className="  w-48 border-2 p-px hover:border-blue-500"
       />
       <div className="h-60 w-px bg-slate-500" />
       <img
-        src={image}
+        src={"https://images.asos-media.com/navigation/denim_MW_220224?&$n_320w$"}
         alt="dsfh"
         className="  w-48 border-2 p-px hover:border-blue-500"
       />
       <div className="h-60 w-px bg-slate-500" />
       <img
-        src={image}
+        src={'https://images.asos-media.com/navigation/offdutystaples_030424?&$n_320w$'}
         alt="dsfh"
         className="w-48 border-2 p-px hover:border-blue-500"
       />
@@ -409,26 +412,26 @@ const Shoes=()=>{
     <div className="shoeshopdiv flex flex-col gap-3 ">
       <h1 className="font-[700] text-lg text-slate-500">SHOP BY BRAND</h1>
       <p>
-        <img src={image} alt="" />
+        <img src={"https://images.asos-media.com/navigation/mw_GBL_Shoes_Boots_2M_132462856?&$n_240w$"} alt="" />
         ASOS DESIGN
       </p>
       <p>
-        <img src={image} alt="" />
+        <img src={"https://images.asos-media.com/navigation/mw_gbl_shoes_newbalance_3M_116525069?&$n_240w$"} alt="" />
         New Balance
       </p>
       <p>
-        <img src={image} alt="" />
+        <img src={"https://images.asos-media.com/navigation/mw_trainers_onrunning_3M_117429267?&$n_240w$"} alt="" />
         On Running
       </p>
-      <p><img src={image} alt="" />
+      <p><img src={"https://images.asos-media.com/navigation/mw_gbl_shoes_adidas_3M_123114802?&$n_240w$"} alt="" />
       adidas
       </p>
       <p>
-        <img src={image} alt="" />
+        <img src={"https://images.asos-media.com/navigation/mw_gbl_shoes_asics_3M_120053713?&$n_240w$"} alt="" />
         Asics
       </p>
       <p>
-        <img src={image} alt="" />
+        <img src={"https://images.asos-media.com/navigation/mw_gbl_shoes_drmartens_3M_123973371?&$n_240w$"} alt="" />
         Dr Martens
       </p>
     </div>
@@ -447,7 +450,7 @@ const Shoes=()=>{
         <li>Vans Old Skool</li>
         <li>Reebok Classic</li>
       </ul>
-    </div>
+    </div> 
     <div className="font-bold text-xl w-80 h-full flex flex-col gap-3">
       <div className="flex bg-cover bg-no-repeate h-32 px-10 items-center justify-start w-full " style={{backgroundImage:`url(${"https://images.asos-media.com/navigation/mw_au_shoes_summershoes_4WL_125403686?&$n_320w$"})`}}>
         <p>SANDALS</p>
